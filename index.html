@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Somasundaram Murugan | Enterprise Data & AI Engineer</title>
+<style>
+  :root {
+    --accent:   #1B4F72;
+    --accent2:  #2E86C1;
+    --light:    #D6EAF8;
+    --dark:     #1a1a1a;
+    --gray:     #555;
+    --bg:       #f8f9fb;
+    --white:    #ffffff;
+    --card:     #ffffff;
+    --border:   #e0e8f0;
+    --cat:      #1B4F72;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--dark); line-height:1.65; }
+
+  /* ── NAV ─────────────────────────────── */
+  nav {
+    position:fixed; top:0; width:100%; background:var(--accent);
+    z-index:1000; padding:0 40px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px; box-shadow:0 2px 12px rgba(0,0,0,.25);
+  }
+  .nav-brand { color:#fff; font-weight:700; font-size:1rem; letter-spacing:.5px; }
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { color:rgba(255,255,255,.85); text-decoration:none; font-size:.85rem; font-weight:500; transition:color .2s; }
+  .nav-links a:hover { color:#fff; }
+
+  /* ── HERO ────────────────────────────── */
+  .hero {
+    background:linear-gradient(135deg, var(--accent) 0%, #154360 55%, #1a2e45 100%);
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+    padding:100px 24px 60px; position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-avatar {
+    width:110px; height:110px; border-radius:50%;
+    background:linear-gradient(135deg,#2E86C1,#1B4F72);
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.4rem; font-weight:700; color:#fff;
+    border:4px solid rgba(255,255,255,.25); margin-bottom:28px;
+    box-shadow:0 8px 32px rgba(0,0,0,.3);
+  }
+  .hero h1 { color:#fff; font-size:2.6rem; font-weight:700; letter-spacing:.5px; margin-bottom:10px; }
+  .hero .role { color:#85C1E9; font-size:1.2rem; font-weight:500; margin-bottom:20px; }
+  .hero .location { color:rgba(255,255,255,.7); font-size:.92rem; margin-bottom:32px; }
+  .hero-badges { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:36px; }
+  .badge {
+    background:rgba(255,255,255,.12); color:#fff;
+    border:1px solid rgba(255,255,255,.2); border-radius:20px;
+    padding:6px 16px; font-size:.8rem; font-weight:500; backdrop-filter:blur(4px);
+  }
+  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .btn-primary {
+    background:#fff; color:var(--accent); padding:12px 28px;
+    border-radius:6px; text-decoration:none; font-weight:700; font-size:.9rem;
+    transition:all .25s; box-shadow:0 4px 14px rgba(0,0,0,.2);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.3); }
+  .btn-outline {
+    background:transparent; color:#fff; padding:12px 28px;
+    border:2px solid rgba(255,255,255,.5); border-radius:6px;
+    text-decoration:none; font-weight:600; font-size:.9rem;
+    transition:all .25s;
+  }
+  .btn-outline:hover { background:rgba(255,255,255,.1); border-color:#fff; }
+
+  /* ── SECTIONS ────────────────────────── */
+  section { padding:72px 24px; }
+  .container { max-width:960px; margin:0 auto; }
+  .section-title {
+    font-size:1.5rem; font-weight:700; color:var(--accent);
+    margin-bottom:8px; display:flex; align-items:center; gap:10px;
+  }
+  .section-title::after {
+    content:''; flex:1; height:2px;
+    background:linear-gradient(90deg,var(--accent),transparent);
+  }
+  .section-sub { color:var(--gray); font-size:.9rem; margin-bottom:36px; }
+
+  /* ── ABOUT ───────────────────────────── */
+  #about { background:var(--white); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .about-text p { color:var(--gray); line-height:1.75; margin-bottom:14px; font-size:.95rem; }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-content:start; }
+  .stat-card {
+    background:var(--bg); border:1px solid var(--border); border-radius:10px;
+    padding:20px; text-align:center; transition:transform .2s;
+  }
+  .stat-card:hover { transform:translateY(-3px); }
+  .stat-num { font-size:2rem; font-weight:800; color:var(--accent); line-height:1; }
+  .stat-label { font-size:.8rem; color:var(--gray); margin-top:4px; }
+
+  /* ── SKILLS ──────────────────────────── */
+  #skills { background:var(--bg); }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+  .skill-card {
+    background:var(--white); border:1px solid var(--border); border-radius:12px;
+    padding:24px; transition:all .25s;
+    border-top:4px solid var(--accent);
+  }
+  .skill-card:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(27,79,114,.12); }
+  .skill-card h4 { color:var(--accent); font-size:.95rem; font-weight:700; margin-bottom:12px; }
+  .skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag {
+    background:var(--light); color:var(--accent); border-radius:4px;
+    padding:3px 10px; font-size:.75rem; font-weight:500;
+  }
+
+  /* ── EXPERIENCE ──────────────────────── */
+  #experience { background:var(--white); }
+  .timeline { position:relative; padding-left:28px; }
+  .timeline::before {
+    content:''; position:absolute; left:8px; top:0; bottom:0;
+    width:2px; background:linear-gradient(var(--accent),var(--light));
+    border-radius:2px;
+  }
+  .job {
+    position:relative; margin-bottom:48px;
+    background:var(--bg); border:1px solid var(--border);
+    border-radius:12px; padding:28px; transition:box-shadow .2s;
+  }
+  .job:hover { box-shadow:0 6px 24px rgba(27,79,114,.1); }
+  .job::before {
+    content:''; position:absolute; left:-33px; top:32px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--accent); border:3px solid var(--white);
+    box-shadow:0 0 0 2px var(--accent);
+  }
+  .job-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
+  .job-title { font-size:1.05rem; font-weight:700; color:var(--dark); }
+  .job-period {
+    background:var(--accent); color:#fff; font-size:.75rem;
+    padding:3px 12px; border-radius:20px; white-space:nowrap;
+  }
+  .job-company { color:var(--accent); font-size:.9rem; font-weight:600; margin-bottom:16px; }
+
+  /* category sub-labels inside job */
+  .cat-label {
+    font-size:.8rem; font-weight:700; color:var(--accent);
+    text-transform:uppercase; letter-spacing:.6px;
+    margin:16px 0 6px; border-left:3px solid var(--accent2);
+    padding-left:8px;
+  }
+  .job ul { padding-left:18px; }
+  .job ul li { color:var(--gray); font-size:.88rem; margin-bottom:7px; line-height:1.6; }
+
+  /* ── EDUCATION ───────────────────────── */
+  #education { background:var(--bg); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .edu-card {
+    background:var(--white); border:1px solid var(--border);
+    border-radius:12px; padding:24px; border-left:5px solid var(--accent);
+    transition:transform .2s;
+  }
+  .edu-card:hover { transform:translateY(-3px); }
+  .edu-card .degree { font-weight:700; color:var(--dark); font-size:.95rem; margin-bottom:4px; }
+  .edu-card .school { color:var(--accent); font-size:.88rem; font-weight:600; margin-bottom:4px; }
+  .edu-card .year { color:var(--gray); font-size:.82rem; }
+  .edu-badge { display:inline-block; background:var(--light); color:var(--accent); font-size:.72rem; font-weight:600; padding:2px 10px; border-radius:20px; margin-top:8px; }
+
+  /* ── CERTIFICATIONS ──────────────────── */
+  #certifications { background:var(--white); }
+  .cert-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .cert-card {
+    background:var(--bg); border:1px solid var(--border); border-radius:10px;
+    padding:18px 20px; display:flex; align-items:flex-start; gap:14px;
+    transition:all .2s;
+  }
+  .cert-card:hover { border-color:var(--accent2); transform:translateY(-2px); }
+  .cert-icon {
+    width:38px; height:38px; border-radius:8px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:1rem; flex-shrink:0;
+  }
+  .cert-info .cert-title { font-size:.85rem; font-weight:600; color:var(--dark); margin-bottom:3px; line-height:1.35; }
+  .cert-info .cert-year { font-size:.77rem; color:var(--gray); }
+
+  /* ── CONTACT ─────────────────────────── */
+  #contact {
+    background:linear-gradient(135deg,var(--accent),#154360);
+    color:#fff; text-align:center;
+  }
+  #contact .section-title { color:#fff; justify-content:center; }
+  #contact .section-title::after { display:none; }
+  #contact p { color:rgba(255,255,255,.8); margin-bottom:28px; font-size:.95rem; }
+  .contact-cards { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:36px; }
+  .contact-card {
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+    border-radius:10px; padding:16px 24px; color:#fff;
+    text-decoration:none; font-size:.88rem; transition:all .2s;
+    backdrop-filter:blur(6px);
+  }
+  .contact-card:hover { background:rgba(255,255,255,.2); transform:translateY(-2px); }
+  .contact-card span { display:block; font-size:.72rem; color:rgba(255,255,255,.6); margin-bottom:3px; }
+
+  /* ── FOOTER ──────────────────────────── */
+  footer { background:#111; color:rgba(255,255,255,.5); text-align:center; padding:20px; font-size:.8rem; }
+
+  /* ── RESPONSIVE ──────────────────────── */
+  @media(max-width:680px){
+    .hero h1 { font-size:1.8rem; }
+    .about-grid { grid-template-columns:1fr; }
+    nav { padding:0 16px; }
+    .nav-links { gap:16px; }
+    .hero-btns { flex-direction:column; align-items:center; }
+  }
+
+  /* ── SCROLL ANIMATION ────────────────── */
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .55s ease,transform .55s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">SM Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-avatar">SM</div>
+  <h1>Somasundaram Murugan</h1>
+  <div class="role">Enterprise Data &amp; AI Engineer</div>
+  <div class="location">📍 Abu Dhabi, UAE &nbsp;·&nbsp; Khalifa Fund for Enterprise Development</div>
+  <div class="hero-badges">
+    <span class="badge">Microsoft Fabric</span>
+    <span class="badge">Databricks</span>
+    <span class="badge">Generative AI</span>
+    <span class="badge">Data Governance</span>
+    <span class="badge">Power BI</span>
+    <span class="badge">MITx Data Science</span>
+  </div>
+  <div class="hero-btns">
+    <a href="https://www.linkedin.com/in/somasundaram-m/" target="_blank" class="btn-primary">🔗 Connect on LinkedIn</a>
+    <a href="#experience" class="btn-outline">View Experience ↓</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-title">About Me</div>
+    <p class="section-sub">A snapshot of who I am and what I bring</p>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>Enterprise Data &amp; AI Engineer specializing in Data Engineering, Artificial Intelligence, Data Governance, and Business Intelligence. Proven in architecting enterprise data platforms on Microsoft Fabric and Databricks, building Generative AI agents, and leading data readiness and governance programs.</p>
+        <p>I work closely with Big-4 consulting teams (Kearney, PwC) and government entities (DED, DGE) to deliver data solutions that are not only technically sound but strategically aligned with Abu Dhabi's national data agenda.</p>
+        <p>Currently pursuing an MITx MicroMasters in Statistics and Data Science, with certifications in Machine Learning, Probability, and Statistics. Recognized with the <strong>CEO Honor Certification</strong> for excellence in AI-driven analytics and data engineering.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">16+</div>
+          <div class="stat-label">Years in IT</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Years in Data &amp; AI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Dashboards Built</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Departments Served</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-title">Core Competencies</div>
+    <p class="section-sub">Technologies and domains I work with</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h4>🤖 AI &amp; Data Engineering</h4>
+        <div class="skill-tags">
+          <span class="tag">AI Agents</span>
+          <span class="tag">Fabric Data Agent</span>
+          <span class="tag">Generative AI</span>
+          <span class="tag">Microsoft Fabric</span>
+          <span class="tag">Databricks</span>
+          <span class="tag">Medallion Architecture</span>
+          <span class="tag">ETL/ELT</span>
+          <span class="tag">API Ingestion</span>
+          <span class="tag">Azure Key Vault</span>
+          <span class="tag">Data Lake</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>🗂 Data Governance</h4>
+        <div class="skill-tags">
+          <span class="tag">Data Catalog</span>
+          <span class="tag">Business Glossary</span>
+          <span class="tag">Metadata Management</span>
+          <span class="tag">Data Owners &amp; Stewards</span>
+          <span class="tag">CDEs</span>
+          <span class="tag">Data Quality</span>
+          <span class="tag">Data Profiling</span>
+          <span class="tag">Data Maturity</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>📊 Business Intelligence</h4>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Qlik Sense</span>
+          <span class="tag">Dashboard Development</span>
+          <span class="tag">Real-time KPI Monitoring</span>
+          <span class="tag">AI-powered Insights</span>
+          <span class="tag">Capacity Planning</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>🤝 Stakeholder Leadership</h4>
+        <div class="skill-tags">
+          <span class="tag">Kearney &amp; PwC Liaison</span>
+          <span class="tag">DED / DGE Coordination</span>
+          <span class="tag">Workshops</span>
+          <span class="tag">SOPs</span>
+          <span class="tag">Cross-functional Leadership</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-title">Professional Experience</div>
+    <p class="section-sub">My career journey</p>
+    <div class="timeline">
+
+      <!-- Job 1 -->
+      <div class="job reveal">
+        <div class="job-header">
+          <div class="job-title">Enterprise Data &amp; AI Engineer</div>
+          <div class="job-period">Dec 2018 – Present</div>
+        </div>
+        <div class="job-company">🏢 Khalifa Fund for Enterprise Development · Abu Dhabi, UAE</div>
+
+        <ul>
+          <li>Designed and built Generative AI (GenAI) agents using Microsoft Copilot Studio and Fabric Data Agents, integrated with Microsoft Teams, for intelligent data discovery, automated insights generation, and conversational data querying.</li>
+          <li>Developed and delivered the Loan Management System (LMS), architecting end-to-end data workflows, system integrations, and reporting pipelines to streamline enterprise lending operations.</li>
+        </ul>
+
+        <div class="cat-label">1. Data Strategy, Readiness &amp; Architecture</div>
+        <ul>
+          <li>Contributed to KFED enterprise data strategy, supporting transition toward a centralized, governed, analytics-ready data platform aligned with Abu Dhabi government data programs.</li>
+          <li>Participated in defining and reviewing data engineering and architecture standards, aligning Databricks and Microsoft Fabric design with metadata-driven, scalable patterns.</li>
+        </ul>
+
+        <div class="cat-label">2. Data Ingestion &amp; Integration</div>
+        <ul>
+          <li>Led ingestion framework reviews, addressing JSON standardization, metadata enforcement, partitioning strategy, and Bronze-to-Gold (Medallion Architecture) transformation design across Databricks and Microsoft Fabric.</li>
+          <li>Supported data integration from Dataverse, SQL Server, and external government sources, coordinating environment access, security roles, and Azure Key Vault permissions.</li>
+        </ul>
+
+        <div class="cat-label">3. Data Governance, Ownership &amp; Metadata</div>
+        <ul>
+          <li>Led data governance implementation, identifying and validating Data Owners, Business Data Stewards, and Technical Stewards across priority CRM and LMS datasets.</li>
+          <li>Designed and maintained enterprise Data Catalog and Business Glossary templates, enabling consistent metadata capture and domain alignment organization-wide.</li>
+        </ul>
+
+        <div class="cat-label">4. Data Quality, Compliance &amp; Control</div>
+        <ul>
+          <li>Designed and implemented data reconciliation procedures between Dataverse and the enterprise data warehouse, ensuring record-level accuracy, traceability, and audit readiness.</li>
+          <li>Supported data compliance and maturity initiatives aligned with government data policies and standards.</li>
+        </ul>
+
+        <div class="cat-label">5. Analytics Enablement &amp; Reporting</div>
+        <ul>
+          <li>Enabled analytics and reporting by provisioning Power BI workspaces, supporting capacity planning, and supplying validated financial and operational datasets (disbursements, collections, overdue amounts) for executive and regulatory reporting.</li>
+        </ul>
+
+        <div class="cat-label">6. Data Sharing &amp; Open Data</div>
+        <ul>
+          <li>Served as the technical focal point for DED and DGE data sharing, coordinating requests, dataset formatting, validation, and secure handover in compliance with Abu Dhabi government data standards.</li>
+          <li>Established Open Data Platform (ODP) processes, enabling structured extraction and publication of approved loan datasets to Abu Dhabi government open-data platforms.</li>
+        </ul>
+
+        <div class="cat-label">7. Capability Building &amp; Stakeholder Enablement</div>
+        <ul>
+          <li>Completed DIAB, Data Products, Data Sharing, and Platform Administration training programs; supported cross-departmental initiatives (HR, Credit, Strategy). Recognized with CEO Honor Certification for excellence in data and AI innovation.</li>
+        </ul>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="job reveal">
+        <div class="job-header">
+          <div class="job-title">Senior Software Developer</div>
+          <div class="job-period">Aug 2012 – Nov 2018</div>
+        </div>
+        <div class="job-company">🏢 Agile Financial Technologies · Abu Dhabi, UAE</div>
+        <ul>
+          <li>Led application development projects enhancing key business features and driving process automation for enterprise financial software solutions.</li>
+          <li>Conducted in-depth business requirements analysis, collaborating with cross-functional stakeholders to translate needs into technical specifications.</li>
+          <li>Managed Level 1 and Level 2 application support, efficiently debugging and resolving critical production issues.</li>
+          <li>Designed and implemented system improvements for performance optimization and enhanced user experience.</li>
+        </ul>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="job reveal">
+        <div class="job-header">
+          <div class="job-title">Software Developer</div>
+          <div class="job-period">Jan 2010 – Jul 2012</div>
+        </div>
+        <div class="job-company">🏢 Encore Theme Technologies · Abu Dhabi, UAE &amp; Chennai, India</div>
+        <ul>
+          <li>Contributed across the full Software Development Lifecycle (SDLC): coding, GUI design, testing, and post-launch support.</li>
+          <li>Specialized in handling and processing large data files (350+ MB) using efficient data management techniques.</li>
+          <li>Spearheaded application implementation and business process optimization initiatives.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-title">Education</div>
+    <p class="section-sub">Academic foundation</p>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="degree">MITx MicroMasters Program</div>
+        <div class="school">Massachusetts Institute of Technology</div>
+        <div class="year">📅 Started Jul 2024</div>
+        <div class="edu-badge">Statistics &amp; Data Science · In Progress</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="degree">B.E. – Computer Science &amp; Technology</div>
+        <div class="school">Anna University</div>
+        <div class="year">📅 Graduated May 2009</div>
+        <div class="edu-badge">Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-title">Certifications</div>
+    <p class="section-sub">Continuous learning &amp; professional development</p>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-info">
+          <div class="cert-title">Microsoft Certified: Data Analyst Associate (Power BI)</div>
+          <div class="cert-year">August 2022</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">📐</div>
+        <div class="cert-info">
+          <div class="cert-title">Probability – The Science of Uncertainty and Data</div>
+          <div class="cert-year">MITx · August 2023</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🤖</div>
+        <div class="cert-info">
+          <div class="cert-title">Machine Learning with Python: Linear Models to Deep Learning</div>
+          <div class="cert-year">MITx · December 2023</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">📊</div>
+        <div class="cert-info">
+          <div class="cert-title">Fundamentals of Statistics</div>
+          <div class="cert-year">MITx · May 2024</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🔬</div>
+        <div class="cert-info">
+          <div class="cert-title">Data Analysis in Social Science (MicroMasters)</div>
+          <div class="cert-year">MITx · May 2025</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🗄️</div>
+        <div class="cert-info">
+          <div class="cert-title">SQL Server Database Administrator Course</div>
+          <div class="cert-year">March – May 2017</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-title">Get In Touch</div>
+    <p>Open to new opportunities, collaborations, and conversations around Data &amp; AI.</p>
+    <div class="contact-cards">
+      <a href="mailto:somu19888@gmail.com" class="contact-card">
+        <span>Email</span>somu19888@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/somasundaram-m/" target="_blank" class="contact-card">
+        <span>LinkedIn</span>linkedin.com/in/somasundaram-m
+      </a>
+      <div class="contact-card">
+        <span>Location</span>Abu Dhabi, UAE
+      </div>
+      <div class="contact-card">
+        <span>Visa</span>Residence Visa (UAE)
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Somasundaram Murugan · Enterprise Data &amp; AI Engineer · Abu Dhabi, UAE
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#'+current ? '#fff' : 'rgba(255,255,255,.75)';
+      a.style.fontWeight = a.getAttribute('href') === '#'+current ? '700' : '500';
+    });
+  });
+</script>
+</body>
+</html>
